@@ -76,19 +76,19 @@ public interface PartyInfoParser extends BinaryEncoder {
             parties.add(new Party(new String(ptyData, UTF_8)));
         }
 
-        String ledgerId = "";
+        String chainId = "";
 
         //check end of the byte buffer
         if(byteBuffer.hasRemaining()){
-            final int ledgerIdLength = toIntExact(byteBuffer.getLong());
+            final int chainIdLength = toIntExact(byteBuffer.getLong());
 
-            checkLength(ledgerIdLength);
-            final byte[] ledgerIdBytes = new byte[ledgerIdLength];
-            byteBuffer.get(ledgerIdBytes);
-            ledgerId = new String(ledgerIdBytes);
+            checkLength(chainIdLength);
+            final byte[] chainIdBytes = new byte[chainIdLength];
+            byteBuffer.get(chainIdBytes);
+            chainId = new String(chainIdBytes);
         }
 
-        return new PartyInfo(url, recipients, parties, ledgerId);
+        return new PartyInfo(url, recipients, parties, chainId);
     }
 
     /**
@@ -124,15 +124,15 @@ public interface PartyInfoParser extends BinaryEncoder {
         final byte[] partiesBytes = encodeArray(parties);
 
         //prefix and ledger bytes
-        final byte[] ledgerId = encodeField(partyInfo.getLedgerId().getBytes());
+        final byte[] chainId = encodeField(partyInfo.getChainId().getBytes());
 
         return ByteBuffer
-            .allocate(url.length + Long.BYTES + recipients.length + partiesBytes.length + ledgerId.length)
+            .allocate(url.length + Long.BYTES + recipients.length + partiesBytes.length + chainId.length)
             .put(url)
             .putLong(partyInfo.getRecipients().size())
             .put(recipients)
             .put(partiesBytes)
-            .put(ledgerId)
+            .put(chainId)
             .array();
 
     }

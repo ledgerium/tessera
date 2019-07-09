@@ -21,5 +21,5 @@ public interface ConfigService {
 
     Set<PublicKey> getPublicKeys();
 
-    String getLedgerId();
+    String getChainId();
 }

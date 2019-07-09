@@ -100,15 +100,15 @@ public class ConfigServiceTest {
     }
 
     @Test
-    public void getLedgerId() {
+    public void getChainId() {
         ServerConfig serverConfig = mock(ServerConfig.class);
-        String ledgerId = "sample";
-        when(serverConfig.getLedgerId()).thenReturn(ledgerId);
+        String chainId = "sample";
+        when(serverConfig.getChainId()).thenReturn(chainId);
         when(config.getP2PServerConfig()).thenReturn(serverConfig);
 
-        assertThat(configService.getLedgerId()).isEqualTo(ledgerId);
+        assertThat(configService.getChainId()).isEqualTo(chainId);
         verify(config).getP2PServerConfig();
-        verify(serverConfig).getLedgerId();
+        verify(serverConfig).getChainId();
 
     }
 }

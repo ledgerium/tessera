@@ -77,10 +77,10 @@ public class ServerConfigTest {
     }
 
     @Test
-    public void ledgerId() {
+    public void chainId() {
         final ServerConfig serverConfig = new ServerConfig(AppType.P2P, true, "unix:/bogis.ipc", CommunicationType.REST, null, null, null);
-        serverConfig.setLedgerId("12345");
-        assertThat(serverConfig.getLedgerId()).isEqualTo("12345");
+        serverConfig.setChainId("12345");
+        assertThat(serverConfig.getChainId()).isEqualTo("12345");
         assertThat(serverConfig.isUnixSocket()).isTrue();
     }
 }

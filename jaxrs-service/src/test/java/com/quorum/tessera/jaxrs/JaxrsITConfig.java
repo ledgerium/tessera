@@ -45,6 +45,7 @@ public class JaxrsITConfig {
 
         Config config = new Config(jdbcConfig,Collections.singletonList(serverConfig),Collections.EMPTY_LIST,keyConfiguration,Collections.EMPTY_LIST,false,false);
 
+
         return config;
     }
 

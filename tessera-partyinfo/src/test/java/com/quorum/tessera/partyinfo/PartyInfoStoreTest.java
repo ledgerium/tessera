@@ -34,7 +34,7 @@ public class PartyInfoStoreTest {
     public void onSetUp() throws URISyntaxException {
         this.configService = mock(ConfigService.class);
         when(configService.getServerUri()).thenReturn(new URI(uri));
-        when(configService.getLedgerId()).thenReturn("sampleLedger");
+        when(configService.getChainId()).thenReturn("sampleLedger");
 
         this.partyInfoStore = new PartyInfoStore(configService);
 

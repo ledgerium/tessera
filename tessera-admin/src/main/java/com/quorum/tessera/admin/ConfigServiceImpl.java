@@ -57,8 +57,8 @@ public class ConfigServiceImpl implements ConfigService {
     }
 
     @Override
-    public String getLedgerId() {
-        return config.getP2PServerConfig().getLedgerId();
+    public String getChainId() {
+        return config.getP2PServerConfig().getChainId();
     }
 
 }

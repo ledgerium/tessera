@@ -152,7 +152,7 @@ public class PartyInfoResourceTest {
         when(partyInfoService.updatePartyInfo(any(PartyInfo.class))).thenReturn(partyInfo);
 
         PartyInfo currentPartyInfo = mock(PartyInfo.class);
-        when(currentPartyInfo.getLedgerId()).thenReturn("");
+        when(currentPartyInfo.getChainId()).thenReturn("");
         when(partyInfoService.getPartyInfo()).thenReturn(currentPartyInfo);
 
         Response result = partyInfoResource.partyInfo(payload);
@@ -249,7 +249,7 @@ public class PartyInfoResourceTest {
         when(invocationBuilder.post(any(Entity.class))).thenReturn(response);
 
         PartyInfo currentPartyInfo = mock(PartyInfo.class);
-        when(currentPartyInfo.getLedgerId()).thenReturn("");
+        when(currentPartyInfo.getChainId()).thenReturn("");
         when(partyInfoService.getPartyInfo()).thenReturn(currentPartyInfo);
 
         try {
@@ -309,7 +309,7 @@ public class PartyInfoResourceTest {
             .thenThrow(new UncheckedIOException(new IOException("GURU meditation")));
 
         PartyInfo currentPartyInfo = mock(PartyInfo.class);
-        when(currentPartyInfo.getLedgerId()).thenReturn("");
+        when(currentPartyInfo.getChainId()).thenReturn("");
         when(partyInfoService.getPartyInfo()).thenReturn(currentPartyInfo);
 
 
@@ -328,7 +328,7 @@ public class PartyInfoResourceTest {
     }
 
     @Test
-    public void partyInfoWithDifferentLedgerId() throws Exception {
+    public void partyInfoWithDifferentchainId() throws Exception {
 
         String url = "http://www.bogus.com";
 
@@ -350,7 +350,7 @@ public class PartyInfoResourceTest {
         when(partyInfoParser.to(partyInfo)).thenReturn(payload);
 
         PartyInfo currentPartyInfo = mock(PartyInfo.class);
-        when(currentPartyInfo.getLedgerId()).thenReturn("ledger");
+        when(currentPartyInfo.getChainId()).thenReturn("ledger");
         when(partyInfoService.getPartyInfo()).thenReturn(currentPartyInfo);
 
         partyInfoResource.partyInfo(payload);

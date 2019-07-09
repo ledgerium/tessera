@@ -39,7 +39,7 @@
                 "knownServersFile": "./ssl/knownServers1"
             },
             "communicationType": "REST",
-            "ledgerId": "1234567890"
+            "chainId": "1234567890"
         }
     ],
     "peer": [

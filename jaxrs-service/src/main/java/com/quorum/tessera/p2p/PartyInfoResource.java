@@ -91,7 +91,7 @@ public class PartyInfoResource {
         final PartyInfo partyInfo = partyInfoParser.from(payload);
 
         //check if the node doesn't have the same ledger Id
-        boolean isValidPeer = Objects.equals(partyInfo.getLedgerId(), partyInfoService.getPartyInfo().getLedgerId());
+        boolean isValidPeer = Objects.equals(partyInfo.getChainId(), partyInfoService.getPartyInfo().getChainId());
         if(!isValidPeer){
             return Response.status(Response.Status.OK).build();
         }

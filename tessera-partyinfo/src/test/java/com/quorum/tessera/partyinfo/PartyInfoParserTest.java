@@ -40,9 +40,9 @@ public class PartyInfoParserTest {
 
         104, 116, 116, 112, 58, 47, 47, 108, 111, 99, 97, 108, 104, 111, 115, 116, 58, 56, 48, 48, 49, //party URL data
 
-        0, 0, 0, 0, 0, 0, 0, 6, //length of ledgerId
+        0, 0, 0, 0, 0, 0, 0, 6, //length of chainId
 
-        108, 101, 100, 103, 101, 114, //ledgerId
+        108, 101, 100, 103, 101, 114, //chainId
 
         0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
         0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
@@ -120,15 +120,15 @@ public class PartyInfoParserTest {
     }
 
     @Test
-    public void fromWithNoLedgerId() {
+    public void fromWithNochainId() {
         PartyInfo result = partyInfoParser.from(dataTwo);
-        assertThat(result.getLedgerId()).isEmpty();
+        assertThat(result.getChainId()).isEmpty();
     }
 
     @Test
-    public void fromWithLedgerId() {
+    public void fromWithchainId() {
         PartyInfo result = partyInfoParser.from(dataOne);
-        assertThat(result.getLedgerId()).isEqualTo("ledger");
+        assertThat(result.getChainId()).isEqualTo("ledger");
     }
 
     @Test

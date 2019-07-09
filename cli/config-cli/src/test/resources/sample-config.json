@@ -33,7 +33,7 @@
                 "tls": "OFF"
             },
             "communicationType": "REST",
-            "ledgerId": "123"
+            "chainId": "123"
         }
     ],
     "peer": [

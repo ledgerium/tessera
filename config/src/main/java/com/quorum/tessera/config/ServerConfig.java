@@ -45,7 +45,7 @@ public class ServerConfig extends ConfigItem {
     private String bindingAddress;
 
     @XmlElement
-    private String ledgerId;
+    private String chainId;
 
     @ValidServerAddress(message = "Server Address is invalid")
     @NotNull
@@ -163,12 +163,12 @@ public class ServerConfig extends ConfigItem {
         this.crossDomainConfig = crossDomainConfig;
     }
 
-    public String getLedgerId() {
-        return Optional.ofNullable(this.ledgerId).orElse("");
+    public String getChainId() {
+        return Optional.ofNullable(this.chainId).orElse("");
     }
 
-    public void setLedgerId(String ledgerId) {
-        this.ledgerId = ledgerId;
+    public void setChainId(String chainId) {
+        this.chainId = chainId;
     }
 
 }

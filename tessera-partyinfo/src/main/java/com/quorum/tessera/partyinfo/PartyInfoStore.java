@@ -31,7 +31,7 @@ public class PartyInfoStore {
 
     private final Set<Party> parties;
 
-    private final String ledgerId;
+    private final String chainId;
 
     public PartyInfoStore(final ConfigService configService) {
 
@@ -41,7 +41,7 @@ public class PartyInfoStore {
         this.recipients = new HashMap<>();
         this.parties = new HashSet<>();
         this.parties.add(new Party(this.advertisedUrl));
-        this.ledgerId = configService.getLedgerId();
+        this.chainId = configService.getChainId();
     }
 
     /**
@@ -75,7 +75,7 @@ public class PartyInfoStore {
             advertisedUrl,
             unmodifiableSet(new HashSet<>(recipients.values())),
             unmodifiableSet(new HashSet<>(parties)),
-            ledgerId
+            chainId
         );
     }
 
