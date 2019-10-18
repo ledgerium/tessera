@@ -76,7 +76,7 @@ public class ConfigServiceTest {
 
         verify(config, times(2)).isDisablePeerDiscovery();
     }
-    
+
     @Test
     public void getServerUri() throws URISyntaxException {
         ServerConfig serverConfig = mock(ServerConfig.class);
@@ -97,5 +97,18 @@ public class ConfigServiceTest {
     public void getPublicKeys() {
         configService.getPublicKeys();
         verify(enclave).getPublicKeys();
+    }
+
+    @Test
+    public void getChainId() {
+        ServerConfig serverConfig = mock(ServerConfig.class);
+        String chainId = "sample";
+        when(serverConfig.getChainId()).thenReturn(chainId);
+        when(config.getP2PServerConfig()).thenReturn(serverConfig);
+
+        assertThat(configService.getChainId()).isEqualTo(chainId);
+        verify(config).getP2PServerConfig();
+        verify(serverConfig).getChainId();
+
     }
 }

@@ -64,6 +64,10 @@ public class JaxrsIT {
 
         when(partyInfoParser.to(partyInfo)).thenReturn(payload);
 
+        PartyInfo currentPartyInfo = mock(PartyInfo.class);
+        when(currentPartyInfo.getChainId()).thenReturn("");
+        when(partyInfoService.getPartyInfo()).thenReturn(currentPartyInfo);
+
         Response response = partyInfoResource.partyInfo(payload);
 
         assertThat(response.getStatus()).isEqualTo(200);

@@ -50,8 +50,8 @@ public class PeerToPeerIT {
     }
 
     /*
-    * Send a valid party info from B to A
-    */
+     * Send a valid party info from B to A
+     */
     @Test
     public void happyCase() {
 
@@ -82,7 +82,6 @@ public class PeerToPeerIT {
             .post(Entity.entity(output, MediaType.APPLICATION_OCTET_STREAM));
 
         assertThat(response.getStatus()).isEqualTo(200);
-
     }
 
 
@@ -136,10 +135,10 @@ public class PeerToPeerIT {
         ServerConfig serverConfig = partyB.getConfig().getP2PServerConfig();
 
         PublicKey publicKey = Optional.of(partyB)
-        .map(Party::getPublicKey)
-        .map(Base64.getDecoder()::decode)
-        .map(PublicKey::from)
-        .get();
+            .map(Party::getPublicKey)
+            .map(Base64.getDecoder()::decode)
+            .map(PublicKey::from)
+            .get();
 
         Recipient itself = new Recipient(publicKey,serverConfig.getServerAddress());
 
@@ -149,7 +148,7 @@ public class PeerToPeerIT {
 
         Set<Recipient> recipients = Stream.of(itself,badRecipient).collect(Collectors.toSet());
 
-        assertThat(recipients).containsExactly(itself,badRecipient);
+        assertThat(recipients).containsExactlyInAnyOrder(itself,badRecipient);
 
         PartyInfo partyInfo = new PartyInfo(serverConfig.getServerAddress(),recipients,Collections.emptySet());
 
@@ -201,7 +200,7 @@ public class PeerToPeerIT {
 
         Set<Recipient> recipients = Stream.of(itself,badRecipient).collect(Collectors.toSet());
 
-        assertThat(recipients).containsExactly(itself,badRecipient);
+        assertThat(recipients).containsExactlyInAnyOrder(itself,badRecipient);
 
         PartyInfo partyInfo = new PartyInfo(serverConfig.getServerAddress(),recipients,Collections.emptySet());
 
@@ -219,9 +218,6 @@ public class PeerToPeerIT {
             .post(Entity.entity(output, MediaType.APPLICATION_OCTET_STREAM));
 
         assertThat(response.getStatus()).isEqualTo(200);
-
-
-
     }
 
 
@@ -254,7 +250,7 @@ public class PeerToPeerIT {
 
         Set<Recipient> recipients = Stream.of(itself,badRecipient).collect(Collectors.toSet());
 
-        assertThat(recipients).containsExactly(itself,badRecipient);
+        assertThat(recipients).containsExactlyInAnyOrder(itself,badRecipient);
 
         PartyInfo partyInfo = new PartyInfo(serverConfig.getServerAddress(),recipients,Collections.emptySet());
 

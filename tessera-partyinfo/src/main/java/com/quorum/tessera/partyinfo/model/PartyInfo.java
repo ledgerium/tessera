@@ -20,10 +20,19 @@ public class PartyInfo {
 
     private Set<Party> parties;
 
+    private String chainId = "";
+
     public PartyInfo(final String url, final Set<Recipient> recipients, final Set<Party> parties) {
         this.url = Objects.requireNonNull(url);
         this.recipients = Collections.unmodifiableSet(new HashSet<>(recipients));
         this.parties = Collections.unmodifiableSet(new HashSet<>(parties));
+    }
+
+    public PartyInfo(final String url, final Set<Recipient> recipients, final Set<Party> parties, final String chainId) {
+        this.url = Objects.requireNonNull(url);
+        this.recipients = Collections.unmodifiableSet(new HashSet<>(recipients));
+        this.parties = Collections.unmodifiableSet(new HashSet<>(parties));
+        this.chainId = Objects.requireNonNull(chainId);
     }
 
     public String getUrl() {
@@ -38,4 +47,7 @@ public class PartyInfo {
         return parties;
     }
 
+    public String getChainId() {
+        return chainId;
+    }
 }

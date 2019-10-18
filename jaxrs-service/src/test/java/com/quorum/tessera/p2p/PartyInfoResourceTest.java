@@ -151,6 +151,10 @@ public class PartyInfoResourceTest {
 
         when(partyInfoService.updatePartyInfo(any(PartyInfo.class))).thenReturn(partyInfo);
 
+        PartyInfo currentPartyInfo = mock(PartyInfo.class);
+        when(currentPartyInfo.getChainId()).thenReturn("");
+        when(partyInfoService.getPartyInfo()).thenReturn(currentPartyInfo);
+
         Response result = partyInfoResource.partyInfo(payload);
 
         assertThat(result.getStatus()).isEqualTo(200);
@@ -162,6 +166,7 @@ public class PartyInfoResourceTest {
         verify(payloadEncoder).encode(encodedPayload);
         verify(restClient).target(url);
         verify(partyInfoService).updatePartyInfo(any(PartyInfo.class));
+        verify(partyInfoService).getPartyInfo();
 
     }
 
@@ -173,10 +178,10 @@ public class PartyInfoResourceTest {
         byte[] payload = message.getBytes();
 
         PublicKey myKey = PublicKey.from("myKey".getBytes());
-        
+
         EncodedPayload encodedPayload = mock(EncodedPayload.class);
         when(encodedPayload.getRecipientKeys()).thenReturn(Collections.singletonList(myKey));
-        
+
         when(payloadEncoder.decode(payload)).thenReturn(encodedPayload);
 
         when(enclave.unencryptTransaction(encodedPayload, myKey)).thenReturn(message.getBytes());
@@ -243,6 +248,10 @@ public class PartyInfoResourceTest {
 
         when(invocationBuilder.post(any(Entity.class))).thenReturn(response);
 
+        PartyInfo currentPartyInfo = mock(PartyInfo.class);
+        when(currentPartyInfo.getChainId()).thenReturn("");
+        when(partyInfoService.getPartyInfo()).thenReturn(currentPartyInfo);
+
         try {
             partyInfoResource.partyInfo(payload);
             failBecauseExceptionWasNotThrown(SecurityException.class);
@@ -252,6 +261,7 @@ public class PartyInfoResourceTest {
             verify(enclave).encryptPayload(any(byte[].class), any(PublicKey.class), anyList());
             verify(payloadEncoder).encode(encodedPayload);
             verify(restClient).target(url);
+            verify(partyInfoService).getPartyInfo();
         }
 
     }
@@ -298,6 +308,10 @@ public class PartyInfoResourceTest {
         when(invocationBuilder.post(any(Entity.class)))
             .thenThrow(new UncheckedIOException(new IOException("GURU meditation")));
 
+        PartyInfo currentPartyInfo = mock(PartyInfo.class);
+        when(currentPartyInfo.getChainId()).thenReturn("");
+        when(partyInfoService.getPartyInfo()).thenReturn(currentPartyInfo);
+
 
         try {
             partyInfoResource.partyInfo(payload);
@@ -308,7 +322,42 @@ public class PartyInfoResourceTest {
             verify(enclave).encryptPayload(any(byte[].class), any(PublicKey.class), anyList());
             verify(payloadEncoder).encode(encodedPayload);
             verify(restClient).target(url);
+            verify(partyInfoService).getPartyInfo();
         }
+
+    }
+
+    @Test
+    public void partyInfoWithDifferentchainId() throws Exception {
+
+        String url = "http://www.bogus.com";
+
+        PublicKey myKey = PublicKey.from("myKey".getBytes());
+
+        PublicKey recipientKey = PublicKey.from("recipientKey".getBytes());
+
+        String message = "I love sparrows";
+
+        byte[] payload = message.getBytes();
+
+        Recipient recipient = new Recipient(recipientKey, url);
+
+        Set<Recipient> recipientList = Collections.singleton(recipient);
+
+        PartyInfo partyInfo = new PartyInfo(url, recipientList, Collections.EMPTY_SET, "differentLedger");
+
+        when(partyInfoParser.from(payload)).thenReturn(partyInfo);
+        when(partyInfoParser.to(partyInfo)).thenReturn(payload);
+
+        PartyInfo currentPartyInfo = mock(PartyInfo.class);
+        when(currentPartyInfo.getChainId()).thenReturn("ledger");
+        when(partyInfoService.getPartyInfo()).thenReturn(currentPartyInfo);
+
+        partyInfoResource.partyInfo(payload);
+
+        verify(partyInfoParser).from(payload);
+        verify(partyInfoService).getPartyInfo();
+
 
     }
 }

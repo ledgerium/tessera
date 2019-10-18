@@ -6,6 +6,7 @@ import org.apache.commons.cli.MissingOptionException;
 import org.apache.commons.codec.binary.Base32;
 import org.apache.commons.io.IOUtils;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.TestName;
@@ -157,7 +158,7 @@ public class CmdLineExecutorTest {
     }
 
     //This tests that even with a lot of files, the file descriptor limit isn't hit
-    @Test
+    @Test @Ignore
     public void directoryStoreAndSqliteWithLotsOfFilesWorks() throws Exception {
         final Path descriptorTestFolder = Files.createTempDirectory("descriptorTest");
         final InputStream dataStream = getClass().getResourceAsStream("/dir/2JRLWGXFSDJUYUKADO7VFO3INL27WUXB2YDR5FCI3REQDTJGX6FULIDCIMYDV4H23PFUECWFYBMTIUTNY2ESAFMQADFCFUYBHBBJT4I=");

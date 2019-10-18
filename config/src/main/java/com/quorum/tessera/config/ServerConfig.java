@@ -11,6 +11,7 @@ import javax.xml.bind.annotation.XmlElement;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.Objects;
+import java.util.Optional;
 
 @XmlAccessorType(XmlAccessType.FIELD)
 public class ServerConfig extends ConfigItem {
@@ -43,6 +44,9 @@ public class ServerConfig extends ConfigItem {
     @XmlElement
     private String bindingAddress;
 
+    @XmlElement
+    private String chainId;
+
     @ValidServerAddress(message = "Server Address is invalid")
     @NotNull
     @XmlElement
@@ -50,7 +54,7 @@ public class ServerConfig extends ConfigItem {
 
     @XmlElement(name = "cors")
     private CrossDomainConfig crossDomainConfig;
-    
+
     public ServerConfig(final AppType app,
                         final boolean enabled,
                         final String serverAddress,
@@ -157,6 +161,14 @@ public class ServerConfig extends ConfigItem {
 
     public void setCrossDomainConfig(CrossDomainConfig crossDomainConfig) {
         this.crossDomainConfig = crossDomainConfig;
+    }
+
+    public String getChainId() {
+        return Optional.ofNullable(this.chainId).orElse("");
+    }
+
+    public void setChainId(String chainId) {
+        this.chainId = chainId;
     }
 
 }

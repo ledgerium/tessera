@@ -75,4 +75,12 @@ public class ServerConfigTest {
         assertThat(serverConfig.getBindingAddress()).isEqualTo("unix:/bogis.ipc");
         assertThat(serverConfig.isUnixSocket()).isTrue();
     }
+
+    @Test
+    public void chainId() {
+        final ServerConfig serverConfig = new ServerConfig(AppType.P2P, true, "unix:/bogis.ipc", CommunicationType.REST, null, null, null);
+        serverConfig.setChainId("12345");
+        assertThat(serverConfig.getChainId()).isEqualTo("12345");
+        assertThat(serverConfig.isUnixSocket()).isTrue();
+    }
 }
