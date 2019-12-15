@@ -1,5 +1,5 @@
 # Build
-FROM maven:3.5.4-jdk-8 as builder
+FROM maven:3.5.4-jdk-8-alpine as builder
 
 # do not use root as there are test cases validating file accessibility
 USER nobody:nogroup

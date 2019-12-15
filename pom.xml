@@ -439,9 +439,9 @@
         <module>data-migration</module>
         <module>config-migration</module>
         <module>shared</module>
-        <module>grpc</module>
+        <!-- <module>grpc</module>
         <module>grpc-api</module>
-        <module>grpc-service</module>
+        <module>grpc-service</module> -->
         <module>jaxrs-service</module>
         <module>tessera-core</module>
         <module>jaxrs-client</module>
@@ -568,7 +568,7 @@
                 <version>0.10-SNAPSHOT</version>
             </dependency>
 
-            <dependency>
+            <!-- <dependency>
                 <groupId>com.jpmorgan.quorum</groupId>
                 <artifactId>grpc-server</artifactId>
                 <version>0.10-SNAPSHOT</version>
@@ -584,7 +584,7 @@
                 <groupId>com.jpmorgan.quorum</groupId>
                 <artifactId>grpc-api</artifactId>
                 <version>0.10-SNAPSHOT</version>
-            </dependency>
+            </dependency> -->
 
             <dependency>
                 <groupId>com.jpmorgan.quorum</groupId>
@@ -605,11 +605,11 @@
                 <version>0.10-SNAPSHOT</version>
             </dependency>
 
-            <dependency>
+            <!-- <dependency>
                 <groupId>com.jpmorgan.quorum</groupId>
                 <artifactId>grpc-service</artifactId>
                 <version>0.10-SNAPSHOT</version>
-            </dependency>
+            </dependency> -->
 
             <dependency>
                 <groupId>com.jpmorgan.quorum</groupId>
@@ -944,7 +944,7 @@
             </dependency>
 
             <!--  GRPC-->
-            <dependency>
+            <!-- <dependency>
                 <groupId>io.grpc</groupId>
                 <artifactId>grpc-netty</artifactId>
                 <version>${grpc.version}</version>
@@ -975,7 +975,7 @@
                 <artifactId>grpc-testing</artifactId>
                 <version>${grpc.version}</version>
                 <scope>test</scope>
-            </dependency>
+            </dependency> -->
 
             <dependency>
                 <groupId>com.google.guava</groupId>
